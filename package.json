@@ -1,0 +1,73 @@
+{
+  "name": "Fakebook",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "test": "jest --coverage",
+    "test:clear": "jest --clearCache",
+    "test:watch": "jest --watch --coverage"
+  },
+  "dependencies": {
+    "graceful-fs": "^4.1.11",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.5",
+    "moment": "^2.22.2",
+    "react": "16.6.0-alpha.8af6728",
+    "react-native": "0.57.3",
+    "react-native-config": "^0.11.5",
+    "react-native-ui-kitten": "^3.1.2",
+    "react-navigation": "^2.18.0",
+    "react-redux": "5.0.7",
+    "redux": "4.0.0",
+    "redux-form": "^7.3.0",
+    "redux-persist": "^5.4.0",
+    "redux-saga": "^0.16.0",
+    "babel-plugin-import-glob": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-preset-react-native": "4.0.0",
+    "detox": "^9.0.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-import-resolver-babel-module": "^4.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.8.2",
+    "husky": "^0.14.3",
+    "is-git-status-clean": "^1.0.0",
+    "jest": "23.6.0",
+    "jest-fetch-mock": "^1.6.2",
+    "metro-react-native-babel-preset": "0.48.1",
+    "mocha": "^5.2.0",
+    "papaparse": "^4.4.0",
+    "react-dom": "^16.4.0",
+    "react-native-version": "^2.6.0",
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "redux-saga-test-plan": "^3.7.0",
+    "rosie": "^1.6.0",
+    "wml": "0.0.83"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-native-i18n|redux-form|react-native-device-info|react-native-fs)/"
+    ],
+    "modulePathIgnorePatterns": [
+      "./__tests__/testHelpers/setupJest.js"
+    ],
+    "testPathIgnorePatterns": [
+      "./__tests__/testHelpers/",
+      "e2e/"
+    ],
+    "setupFiles": [
+      "./__tests__/testHelpers/setupJest.js"
+    ]
+  }
+}
