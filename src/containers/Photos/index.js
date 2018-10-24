@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 const styles = StyleSheet.create({
 	container: {
@@ -22,23 +22,22 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default class Home extends Component {
+export default class Photos extends Component {
 	static navigationOptions = {
-		tabBarLabel: 'Home',
+		tabBarLabel: 'Photos',
 		tabBarIcon: ({ tintColor }) => (
 			<Ionicons
-				name="ios-home"
+				name="ios-image"
 				size={26}
 				style={{ color: tintColor }}
 			/>
 		),
-		title: 'Home',
+		title: 'Photos',
 	};
-
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text style={styles.welcome}>Home</Text>
+				<Text style={styles.welcome}>User tab</Text>
 			</View>
 		);
 	}

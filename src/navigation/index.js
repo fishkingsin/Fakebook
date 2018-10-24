@@ -11,10 +11,8 @@ import * as containers from '~cont/*/index.js';
 
 export const RootStack = createSwitchNavigator(
 	{
-		
 		Main: createStackNavigator({
 			Tabs: containers.Tabs,
-			Home: containers.Home,
 		}, {
 			initialRouteName: 'Tabs',
 		}),

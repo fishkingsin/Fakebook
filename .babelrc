@@ -1,6 +1,6 @@
 {
-  "presets": ["module:metro-react-native-babel-preset"],
-  "plugins": [
+	"presets": ["module:metro-react-native-babel-preset"],
+  	"plugins": [
 		[
 			"module-resolver",
 			{
@@ -14,7 +14,8 @@
 					"~": "./src",
 					"~comp": "./src/components",
 					"~cont": "./src/containers"
-				}
+				},
+				"root": ["./src/**/"]
 			}
 		],
 		"import-glob"

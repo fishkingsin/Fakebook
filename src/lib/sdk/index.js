@@ -1,10 +1,18 @@
-import { Platform } from 'react-native';
-import { config } from '~/config';
+
+import { config } from '../../config';
+import {
+	handleRequestData,
+	jsonToURLEncoded,
+} from './helper';
+import posts from './posts';
+import users from './users';
 
 export const callApi = (method, url, callCfg = {}) => {
 	const {
-        baseUrl = config.urls.api,
-        headers,
+		data = null,
+		params = null,
+		baseUrl = config.urls.api,
+		headers,
 		...otherCfg
 	} = callCfg;
 	const reqCfg = {
@@ -15,7 +23,7 @@ export const callApi = (method, url, callCfg = {}) => {
 		},
 		...otherCfg,
 	};
-	
+
 	if (data !== null) {
 		reqCfg.body = handleRequestData(reqCfg.headers['content-type'], data);
 	}
@@ -32,4 +40,9 @@ export const callApi = (method, url, callCfg = {}) => {
 			}
 			return responseJson;
 		});
+};
+
+export const SDK = {
+	posts: posts(callApi),
+	users: users(callApi),
 };
