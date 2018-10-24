@@ -15,9 +15,7 @@ export const callApi = (method, url, callCfg = {}) => {
 		},
 		...otherCfg,
 	};
-	if (token && typeof token === 'string') {
-		reqCfg.headers.Authorization = `Bearer ${token}`;
-	}
+	
 	if (data !== null) {
 		reqCfg.body = handleRequestData(reqCfg.headers['content-type'], data);
 	}
