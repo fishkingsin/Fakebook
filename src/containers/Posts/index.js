@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	Button,
+	FlatList,
+	TouchableOpacity,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
-import { GET_POSTS } from '../../store/actionTypes';
+import { GET_POSTS } from '~/store/actionTypes';
+
+const tableCellHeight = 72;
 
 const styles = StyleSheet.create({
 	container: {
@@ -23,9 +32,12 @@ const styles = StyleSheet.create({
 		color: '#333333',
 		marginBottom: 5,
 	},
+	cell: {
+		height: tableCellHeight,
+		flex: 1,
+	},
 });
 
-const tableCellHeight = 72;
 class Posts extends Component {
 	static navigationOptions = {
 		tabBarLabel: 'Post',
@@ -39,6 +51,7 @@ class Posts extends Component {
 		title: 'Posts',
 	};
 	static propTypes = {
+		navigation: PropTypes.object.isRequired,
 		posts: PropTypes.array.isRequired,
 		getPosts: PropTypes.func.isRequired,
 	}
@@ -54,14 +67,25 @@ class Posts extends Component {
 		}
 	}
 
+	onPress = () => {
+		console.log('this.props.navigation', this.props.navigation);
+		this.props.navigation.navigate('Detail');
+	}
+
 	getPosts = () => {
 		this.props.getPosts();
 	}
 
-	renderComponent = (item) => (
-		<View>
-			<Text>{ JSON.stringify(item, null, 2) }</Text>
-		</View>
+	renderComponent = (item, index) => (
+		<TouchableOpacity onPress={this.onPress}>
+			<View style={[
+				styles.cell,
+				{ backgroundColor: (index % 2 === 0) ? 'skyblue' : 'powderblue' },
+			]}
+			>
+				<Text>{ item.title }</Text>
+			</View>
+		</TouchableOpacity>
 	)
 
 	render() {
@@ -69,12 +93,12 @@ class Posts extends Component {
 			<View style={styles.container}>
 				<Button title="Get Posts" onPress={this.getPosts} />
 				<FlatList
-					style={{ flex: 1, backgroundColor: 'skyblue' }}
+					style={{ flex: 1 }}
 					initialScrollIndex={0}
 					data={this.props.posts}
 					keyExtractor={item => `${item.id}`}
 					ref={(ref) => { this.flatListRef = ref; }}
-					renderItem={({ item }) => this.renderComponent(item)}
+					renderItem={({ item, index }) => this.renderComponent(item, index)}
 					getItemLayout={(data, index) => ({
 						length: tableCellHeight,
 						offset: tableCellHeight * index,

@@ -1,11 +1,14 @@
 
-import { config } from '../../config';
+import { config } from '~/config';
 import {
 	handleRequestData,
 	jsonToURLEncoded,
 } from './helper';
 import posts from './posts';
 import users from './users';
+import photos from './photos';
+import albums from './albums';
+import { call } from 'redux-saga/effects';
 
 export const callApi = (method, url, callCfg = {}) => {
 	const {
@@ -45,4 +48,6 @@ export const callApi = (method, url, callCfg = {}) => {
 export const SDK = {
 	posts: posts(callApi),
 	users: users(callApi),
+	albums: albums(callApi),
+	photos: photos(callApi),
 };

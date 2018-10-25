@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
-import { GET_USERS } from '../../store/actionTypes';
+import { GET_USERS } from '~/store/actionTypes';
 
 const tableCellHeight = 72;
 const styles = StyleSheet.create({
@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#333333',
 		marginBottom: 5,
+	},
+	cell: {
+		height: tableCellHeight,
+		flex: 1,
 	},
 });
 
@@ -53,9 +57,13 @@ class People extends Component {
 		this.props.getUsers();
 	}
 
-	renderComponent = (item) => (
-		<View>
-			<Text>{ JSON.stringify(item, null, 2) }</Text>
+	renderComponent = (item, index) => (
+		<View style={[
+			styles.cell,
+			{ backgroundColor: (index % 2 === 0) ? 'skyblue' : 'powderblue' },
+		]}
+		>
+			<Text style={{ flex: 1 }}>{ item.name }</Text>
 		</View>
 	)
 
@@ -65,12 +73,12 @@ class People extends Component {
 				<Text style={styles.welcome}>User tab</Text>
 				<Button title="Get Users" onPress={this.getUsers} />
 				<FlatList
-					style={{ flex: 1, backgroundColor: 'skyblue' }}
+					style={{ flex: 1 }}
 					initialScrollIndex={0}
 					data={this.props.users}
 					keyExtractor={item => `${item.id}`}
 					ref={(ref) => { this.flatListRef = ref; }}
-					renderItem={({ item }) => this.renderComponent(item)}
+					renderItem={({ item, index }) => this.renderComponent(item, index)}
 					getItemLayout={(data, index) => ({
 						length: tableCellHeight,
 						offset: tableCellHeight * index,

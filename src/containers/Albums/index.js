@@ -3,6 +3,7 @@ import {
 	StyleSheet,
 	Text,
 	View,
+	Button,
 	FlatList,
 	TouchableOpacity,
 	SafeAreaView,
@@ -10,11 +11,10 @@ import {
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FastImage from 'react-native-fast-image';
 import _ from 'lodash';
-import { GET_PHOTOS } from '~/store/actionTypes';
+import { GET_ALBUMS, GET_PHOTOS } from '~/store/actionTypes';
 
-const NUM_COLUMN = 4;
+const tableCellHeight = 72;
 
 const styles = StyleSheet.create({
 	container: {
@@ -34,53 +34,63 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 	},
 	cellContainer: {
-		flex: 1 / NUM_COLUMN,
+		flex: 1 / 2,
 		aspectRatio: 1,
 	},
 	cell: {
 		flex: 1,
+		alignItems: 'center',
 		margin: 5,
 	},
 });
 
-class Photos extends Component {
+class Albums extends Component {
 	static navigationOptions = {
-		tabBarLabel: 'Photos',
+		tabBarLabel: 'Albums',
 		tabBarIcon: ({ tintColor }) => (
 			<Ionicons
-				name="ios-photos"
+				name="ios-albums"
 				size={26}
 				style={{ color: tintColor }}
 			/>
 		),
-		title: 'Photos',
+		title: 'Albums',
 	};
 	static propTypes = {
 		navigation: PropTypes.object.isRequired,
+		albums: PropTypes.array.isRequired,
 		photos: PropTypes.array.isRequired,
+		getAlbums: PropTypes.func.isRequired,
 		getPhotos: PropTypes.func.isRequired,
 	}
 
 	constructor(props) {
 		super(props);
+		this.getAlbums = this.getAlbums.bind(this);
 		this.getPhotos = this.getPhotos.bind(this);
-		this.getPhotos();
 	}
 
 	componentWillMount() {
+		this.getAlbums();
 		this.getPhotos();
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (_.isEqual(nextProps.photos, this.props.photos)) {
-			console.log('componentWillReceiveProps', nextProps.photos);
+		if (_.isEqual(nextProps.albums, this.props.albums)) {
+			// console.log('componentWillReceiveProps', nextProps.albums);
 		}
 	}
 
 
-	onPress = () => {
+	onPress = (id) => {
 		console.log('this.props.navigation', this.props.navigation);
-		this.props.navigation.navigate('Photos');
+		this.props.navigation.navigate('Photos', {
+			albumId: id,
+		});
+	}
+
+	getAlbums = () => {
+		this.props.getAlbums();
 	}
 
 	getPhotos = () => {
@@ -88,19 +98,13 @@ class Photos extends Component {
 	}
 
 	renderComponent = (item, index) => (
-
-		<TouchableOpacity style={styles.cellContainer} onPress={this.onPress}>
+		<TouchableOpacity style={styles.cellContainer} onPress={() => { this.onPress(item.id); }}>
 			<View style={[
 				styles.cell,
-				{ backgroundColor: 'gray' },
+				{ backgroundColor: (index % 2 === 0) ? 'skyblue' : 'powderblue' },
 			]}
 			>
-				<FastImage
-					style={{ flex: 1 }}
-					source={{ uri: item.thumbnailUrl }} 
-					resizeMode={FastImage.resizeMode.cover}
-				/>
-				<Text numberOfLines={1} >{ item.title}</Text>
+				<Text>{ item.title }</Text>
 			</View>
 		</TouchableOpacity>
 	)
@@ -112,8 +116,8 @@ class Photos extends Component {
 					<FlatList
 						contentContainerStyle={styles.list}
 						initialScrollIndex={0}
-						numColumns={NUM_COLUMN}
-						data={this.props.photos}
+						numColumns={2}
+						data={this.props.albums}
 						keyExtractor={item => `${item.id}`}
 						ref={(ref) => { this.flatListRef = ref; }}
 						renderItem={({ item, index }) => this.renderComponent(item, index)}
@@ -123,15 +127,17 @@ class Photos extends Component {
 		);
 	}
 }
-const mapStateToProps = (state, ownProps) => {
-	const albumId = ownProps.navigation.getParam('albumId');
-	return {
-		photos: _.filter(state.photos.photos, { albumId }),
-	};
-};
+const mapStateToProps = (state) => ({
+	albums: state.albums.albums,
+	photos: state.photos.photos,
+});
 const mapActionsToProps = (dispatch) => ({
+	getAlbums() {
+		dispatch({ type: GET_ALBUMS });
+	},
 	getPhotos() {
 		dispatch({ type: GET_PHOTOS });
 	},
 });
-export default connect(mapStateToProps, mapActionsToProps)(Photos);
+
+export default connect(mapStateToProps, mapActionsToProps)(Albums);
