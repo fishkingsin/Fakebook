@@ -7,11 +7,19 @@ import {
 	FlatList,
 	TouchableOpacity,
 } from 'react-native';
+import {
+	RkButton,
+	RkText,
+	RkCard,
+	RkTheme,
+} from 'react-native-ui-kitten';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
-import { GET_POSTS } from '~/store/actionTypes';
+import { GET_POSTS, GET_POST_COMMENTS } from '../../store/actionTypes';
+import Comments from '../../components/Comments';
 
 const tableCellHeight = 72;
 
@@ -38,12 +46,15 @@ const styles = StyleSheet.create({
 	},
 });
 
+const iconButton = [styles.buttonIcon, { color: RkTheme.current.colors.text.hint }];
+
+
 class Posts extends Component {
 	static navigationOptions = {
 		tabBarLabel: 'Post',
 		tabBarIcon: ({ tintColor }) => (
-			<Ionicons
-				name="ios-paper"
+			<Icon
+				name="newspaper-o"
 				size={26}
 				style={{ color: tintColor }}
 			/>
@@ -67,6 +78,10 @@ class Posts extends Component {
 		}
 	}
 
+	componentWillMount() {
+		this.props.getPosts();
+	}
+
 	onPress = () => {
 		console.log('this.props.navigation', this.props.navigation);
 		this.props.navigation.navigate('Detail');
@@ -76,22 +91,28 @@ class Posts extends Component {
 		this.props.getPosts();
 	}
 
-	renderComponent = (item, index) => (
-		<TouchableOpacity onPress={this.onPress}>
-			<View style={[
-				styles.cell,
-				{ backgroundColor: (index % 2 === 0) ? 'skyblue' : 'powderblue' },
-			]}
-			>
-				<Text>{ item.title }</Text>
+	renderComponent = (post, index) => (
+		<RkCard>
+			<View rkCardHeader>
+				<View>
+					<RkText rkType="header">{ post.title }</RkText>
+					{/* <RkText rkType="subtitle">Subtitle</RkText> */}
+				</View>
 			</View>
-		</TouchableOpacity>
+			<View rkCardContent>
+				<RkText rkType="cardText">
+					{ post.body }
+				</RkText>
+			</View>
+			<View rkCardFooter>
+				<Comments postId={post.id} />
+			</View>
+		</RkCard>
 	)
 
 	render() {
 		return (
 			<View style={styles.container}>
-				<Button title="Get Posts" onPress={this.getPosts} />
 				<FlatList
 					style={{ flex: 1 }}
 					initialScrollIndex={0}

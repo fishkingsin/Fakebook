@@ -1,9 +1,10 @@
 import { takeLatest, all } from 'redux-saga/effects';
-import * as types from '~/store/actionTypes';
+import * as types from '../../store/actionTypes';
 import * as posts from './posts';
 import * as users from './users';
 import * as photos from './photos';
 import * as albums from './albums';
+import * as comments from './comments';
 
 export function* watchGetPosts() {
 	yield takeLatest(types.GET_POSTS, posts.getPosts);
@@ -21,11 +22,17 @@ export function* watchGetAlbums() {
 	yield takeLatest(types.GET_ALBUMS, albums.getAlbums);
 }
 
+export function* watchGetComment() {
+	yield takeLatest(types.GET_POST_COMMENTS, comments.getComments);
+}
+
+
 export default function* rootSaga() {
 	yield all([
 		watchGetPosts(),
 		watchGetUsers(),
 		watchGetPhotos(),
 		watchGetAlbums(),
+		watchGetComment(),
 	]);
 }

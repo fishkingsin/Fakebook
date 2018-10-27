@@ -2,7 +2,7 @@ import {
 	GET_USERS,
 	GET_USERS_SUCCESS,
 	GET_USERS_FAILED,
-} from '~/store/actionTypes';
+} from '../store/actionTypes';
 
 const initialState = {
 	users: [],

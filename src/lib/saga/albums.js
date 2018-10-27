@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import * as types from '~/store/actionTypes';
+import * as types from '../../store/actionTypes';
 import { SDK } from '~/lib/sdk';
 
 
@@ -10,4 +10,4 @@ export function* getAlbums() {
 	} catch (error) {
 		yield put({ type: types.GET_ALBUMS_FAILED, payload: { error } });
 	}
-};
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
 	container: {
@@ -26,8 +26,8 @@ export default class Home extends Component {
 	static navigationOptions = {
 		tabBarLabel: 'Home',
 		tabBarIcon: ({ tintColor }) => (
-			<Ionicons
-				name="ios-home"
+			<Icon
+				name="home"
 				size={26}
 				style={{ color: tintColor }}
 			/>

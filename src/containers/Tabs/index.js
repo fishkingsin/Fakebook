@@ -6,7 +6,7 @@ import React from 'react';
 import { Platform, ScrollView, StatusBar, View } from 'react-native';
 import { SafeAreaView, createBottomTabNavigator } from 'react-navigation';
 import * as containers from '~cont/*/index.js';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SimpleTabs = createBottomTabNavigator(
 	{

@@ -3,16 +3,16 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	Button,
 	FlatList,
 	TouchableOpacity,
 	SafeAreaView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import FastImage from 'react-native-fast-image';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
-import { GET_ALBUMS, GET_PHOTOS } from '~/store/actionTypes';
+import { GET_ALBUMS, GET_PHOTOS } from '../../store/actionTypes';
 
 const tableCellHeight = 72;
 
@@ -39,8 +39,16 @@ const styles = StyleSheet.create({
 	},
 	cell: {
 		flex: 1,
-		alignItems: 'center',
 		margin: 5,
+	},
+	text: {
+		backgroundColor: 'rgba(52, 52, 52, 0.8)',
+		position: 'absolute',
+		bottom: 0,
+		color: 'white',
+		right: 0,
+		left: 0,
+		textAlign: 'center',
 	},
 });
 
@@ -48,8 +56,8 @@ class Albums extends Component {
 	static navigationOptions = {
 		tabBarLabel: 'Albums',
 		tabBarIcon: ({ tintColor }) => (
-			<Ionicons
-				name="ios-albums"
+			<Icon
+				name="picture-o"
 				size={26}
 				style={{ color: tintColor }}
 			/>
@@ -62,12 +70,14 @@ class Albums extends Component {
 		photos: PropTypes.array.isRequired,
 		getAlbums: PropTypes.func.isRequired,
 		getPhotos: PropTypes.func.isRequired,
+		loading: PropTypes.bool.isRequired,
 	}
 
 	constructor(props) {
 		super(props);
 		this.getAlbums = this.getAlbums.bind(this);
 		this.getPhotos = this.getPhotos.bind(this);
+		this.onRefresh = this.onRefresh.bind(this);
 	}
 
 	componentWillMount() {
@@ -84,9 +94,12 @@ class Albums extends Component {
 
 	onPress = (id) => {
 		console.log('this.props.navigation', this.props.navigation);
-		this.props.navigation.navigate('Photos', {
+		this.props.navigation.push('Photos', {
 			albumId: id,
 		});
+	}
+
+	onRefresh = () => {
 	}
 
 	getAlbums = () => {
@@ -97,17 +110,26 @@ class Albums extends Component {
 		this.props.getPhotos();
 	}
 
-	renderComponent = (item, index) => (
-		<TouchableOpacity style={styles.cellContainer} onPress={() => { this.onPress(item.id); }}>
-			<View style={[
-				styles.cell,
-				{ backgroundColor: (index % 2 === 0) ? 'skyblue' : 'powderblue' },
-			]}
-			>
-				<Text>{ item.title }</Text>
-			</View>
-		</TouchableOpacity>
-	)
+	renderComponent = (item, index) => {
+		const photo = _.find(this.props.photos, { albumId: item.id });
+		return (
+			<TouchableOpacity style={styles.cellContainer} onPress={() => { this.onPress(item.id); }}>
+				<View style={[
+					styles.cell,
+				]}
+				>
+					{
+						(photo !== undefined) && <FastImage
+							style={{ flex: 1 }}
+							source={{ uri: photo.thumbnailUrl }}
+							resizeMode={FastImage.resizeMode.cover}
+						/>
+					}
+					<Text style={styles.text} numberOfLines={1} >{ item.title }</Text>
+				</View>
+			</TouchableOpacity>
+		);
+	}
 
 	render() {
 		return (
@@ -121,6 +143,8 @@ class Albums extends Component {
 						keyExtractor={item => `${item.id}`}
 						ref={(ref) => { this.flatListRef = ref; }}
 						renderItem={({ item, index }) => this.renderComponent(item, index)}
+						onRefresh={() => this.onRefresh()}
+						refreshing={this.props.loading}
 					/>
 				</View>
 			</SafeAreaView>
@@ -130,6 +154,7 @@ class Albums extends Component {
 const mapStateToProps = (state) => ({
 	albums: state.albums.albums,
 	photos: state.photos.photos,
+	loading: state.albums.loading,
 });
 const mapActionsToProps = (dispatch) => ({
 	getAlbums() {

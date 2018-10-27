@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
-import { GET_USERS } from '~/store/actionTypes';
+import { GET_USERS } from '../../store/actionTypes';
 
 const tableCellHeight = 72;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
 	},
 	welcome: {
@@ -32,15 +30,15 @@ const styles = StyleSheet.create({
 
 class People extends Component {
 	static navigationOptions = {
-		tabBarLabel: 'People',
+		tabBarLabel: 'User',
 		tabBarIcon: ({ tintColor }) => (
-			<Ionicons
-				name="ios-people"
+			<Icon
+				name="user"
 				size={26}
 				style={{ color: tintColor }}
 			/>
 		),
-		title: 'People',
+		title: 'User',
 	};
 
 	static propTypes = {
@@ -70,11 +68,9 @@ class People extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text style={styles.welcome}>User tab</Text>
-				<Button title="Get Users" onPress={this.getUsers} />
 				<FlatList
-					style={{ flex: 1 }}
 					initialScrollIndex={0}
+					numColumns={1}
 					data={this.props.users}
 					keyExtractor={item => `${item.id}`}
 					ref={(ref) => { this.flatListRef = ref; }}

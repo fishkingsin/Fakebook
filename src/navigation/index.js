@@ -8,16 +8,20 @@ import {
 import { View } from 'react-native';
 import * as containers from '~cont/*/index.js';
 
-
 export const RootStack = createSwitchNavigator(
 	{
-		Main: createStackNavigator({
-			Tabs: containers.Tabs,
-			Detail: containers.Detail,
-			Photos: containers.Photos,
-		}, {
-			initialRouteName: 'Tabs',
-		}),
+		Main: createStackNavigator(
+			{
+				Tabs: containers.Tabs,
+				Detail: containers.Detail,
+				Photos: containers.Photos,
+				Preview: containers.Preview,
+			},
+			{
+				initialRouteName: 'Tabs',
+			},
+		),
+		ModalStack: containers.ModalStack,
 	},
 	{
 		initialRouteName: 'Main',

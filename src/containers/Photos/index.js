@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import FastImage from 'react-native-fast-image';
 import _ from 'lodash';
-import { GET_PHOTOS } from '~/store/actionTypes';
+import { GET_PHOTOS } from '../../store/actionTypes';
 
 const NUM_COLUMN = 4;
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 	},
 	cell: {
 		flex: 1,
-		margin: 5,
+		margin: 1,
 	},
 });
 
@@ -47,8 +47,8 @@ class Photos extends Component {
 	static navigationOptions = {
 		tabBarLabel: 'Photos',
 		tabBarIcon: ({ tintColor }) => (
-			<Ionicons
-				name="ios-photos"
+			<Icon
+				name="photos"
 				size={26}
 				style={{ color: tintColor }}
 			/>
@@ -78,9 +78,12 @@ class Photos extends Component {
 	}
 
 
-	onPress = () => {
+	onPress = (index) => {
 		console.log('this.props.navigation', this.props.navigation);
-		this.props.navigation.navigate('Photos');
+		this.props.navigation.push('Preview', {
+			photos: this.props.photos,
+			initialRenderIndex: index,
+		});
 	}
 
 	getPhotos = () => {
@@ -89,7 +92,7 @@ class Photos extends Component {
 
 	renderComponent = (item, index) => (
 
-		<TouchableOpacity style={styles.cellContainer} onPress={this.onPress}>
+		<TouchableOpacity style={styles.cellContainer} onPress={() => { this.onPress(index); }}>
 			<View style={[
 				styles.cell,
 				{ backgroundColor: 'gray' },
@@ -97,10 +100,10 @@ class Photos extends Component {
 			>
 				<FastImage
 					style={{ flex: 1 }}
-					source={{ uri: item.thumbnailUrl }} 
+					source={{ uri: item.thumbnailUrl }}
 					resizeMode={FastImage.resizeMode.cover}
 				/>
-				<Text numberOfLines={1} >{ item.title}</Text>
+				{/* <Text numberOfLines={1} >{ item.title}</Text> */}
 			</View>
 		</TouchableOpacity>
 	)
