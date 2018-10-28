@@ -81,7 +81,6 @@ class Preview extends Component {
 			styles.cell,
 		]}
 		>
-			
 			<FastImage
 				style={{ flex: 0.9 }}
 				source={{ uri: item.url }}

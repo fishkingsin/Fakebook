@@ -100,6 +100,8 @@ class Albums extends Component {
 	}
 
 	onRefresh = () => {
+		this.getAlbums();
+		this.getPhotos();
 	}
 
 	getAlbums = () => {
@@ -152,9 +154,9 @@ class Albums extends Component {
 	}
 }
 const mapStateToProps = (state) => ({
-	albums: state.albums.albums,
-	photos: state.photos.photos,
-	loading: state.albums.loading,
+	albums: (state.albums.albums || []),
+	photos: (state.photos.photos || []),
+	loading: (state.albums.loading || false),
 });
 const mapActionsToProps = (dispatch) => ({
 	getAlbums() {

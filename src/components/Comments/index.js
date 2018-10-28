@@ -88,7 +88,6 @@ class Comment extends Component {
 const mapStateToProps = (state, ownPorps) => {
 	const post = _.find(state.posts.posts, { id: ownPorps.postId });
 	const c = post ? post.comments : [];
-	// console.log('comments', c);
 	return {
 		comments: (c || []),
 	};

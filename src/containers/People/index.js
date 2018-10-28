@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 import { GET_USERS } from '../../store/actionTypes';
+import { Avatar } from '../../components/avatar';
 
 const tableCellHeight = 72;
 const styles = StyleSheet.create({
@@ -23,8 +24,13 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 	},
 	cell: {
+		marginBottom: 2,
 		height: tableCellHeight,
 		flex: 1,
+	},
+	rowSeparator: {
+		backgroundColor: 'rgba(0, 0, 0, 0.1)',
+		height: 1,
 	},
 });
 
@@ -42,6 +48,7 @@ class People extends Component {
 	};
 
 	static propTypes = {
+		navigation: PropTypes.object.isRequired,
 		users: PropTypes.array.isRequired,
 		getUsers: PropTypes.func.isRequired,
 	}
@@ -51,19 +58,71 @@ class People extends Component {
 		this.getUsers = this.getUsers.bind(this);
 	}
 
+	componentWillMount() {
+		this.getUsers();
+	}
+
+	onPress = (id, item) => {
+		this.props.navigation.push('Detail', {
+			userId: id,
+			user: item,
+		});
+	}
+
 	getUsers = () => {
 		this.props.getUsers();
 	}
 
 	renderComponent = (item, index) => (
-		<View style={[
-			styles.cell,
-			{ backgroundColor: (index % 2 === 0) ? 'skyblue' : 'powderblue' },
-		]}
-		>
-			<Text style={{ flex: 1 }}>{ item.name }</Text>
-		</View>
+		<TouchableOpacity style={styles.cellContainer} onPress={() => { this.onPress(item.id, item); }}>
+			<View style={[
+				styles.cell,
+			]}
+			>
+				<View style={{
+					flex: 1,
+					flexDirection: 'row',
+					justifyContent: 'space-around',
+					alignContent: 'center',
+				}}
+				>
+					<View style={{
+						marginLeft: 10,
+						flex: 0.9,
+						justifyContent: 'space-around',
+						alignContent: 'center',
+					}}
+					>
+						<Avatar
+							name={item.name}
+							description={item.email}
+						/>
+						{/* <Text style={{ fontSize: 26 }}>
+							{ item.name }
+						</Text> */}
+					</View>
+					<View style={{
+						marginRight: 10,
+						flex: 0.1,
+						justifyContent: 'space-around',
+						alignContent: 'center',
+					}}>	
+						<Icon name="caret-right" size={26} />
+					</View>
+				</View>
+				<View
+					style={[styles.rowSeparator]}
+				/>
+			</View>
+		</TouchableOpacity>
 	)
+
+	renderSeparator = (highlighted) => (
+		<View
+			style={[styles.rowSeparator,
+				{ opacity: highlighted ? 0.0 : 1.0 }]}
+		/>
+	);
 
 	render() {
 		return (
@@ -80,6 +139,7 @@ class People extends Component {
 						offset: tableCellHeight * index,
 						index,
 					})}
+					ItemSeparatorComponent={this.renderSeparator}
 				/>
 			</View>
 		);

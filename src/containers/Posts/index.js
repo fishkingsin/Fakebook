@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
 		height: tableCellHeight,
 		flex: 1,
 	},
+	rowSeparator: {
+		backgroundColor: 'rgba(0, 0, 0, 0.1)',
+		height: 1,
+	},
 });
 
 const iconButton = [styles.buttonIcon, { color: RkTheme.current.colors.text.hint }];
@@ -65,17 +69,13 @@ class Posts extends Component {
 		navigation: PropTypes.object.isRequired,
 		posts: PropTypes.array.isRequired,
 		getPosts: PropTypes.func.isRequired,
+		loading: PropTypes.bool.isRequired,
 	}
 
 	constructor(props) {
 		super(props);
 		this.getPosts = this.getPosts.bind(this);
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (_.isEqual(nextProps.posts, this.props.posts)) {
-			console.log('componentWillReceiveProps', nextProps.posts);
-		}
+		this.onRefresh = this.onRefresh.bind(this);
 	}
 
 	componentWillMount() {
@@ -85,6 +85,10 @@ class Posts extends Component {
 	onPress = () => {
 		console.log('this.props.navigation', this.props.navigation);
 		this.props.navigation.navigate('Detail');
+	}
+
+	onRefresh = () => {
+		this.getPosts();
 	}
 
 	getPosts = () => {
@@ -104,11 +108,13 @@ class Posts extends Component {
 					{ post.body }
 				</RkText>
 			</View>
-			<View rkCardFooter>
-				<Comments postId={post.id} />
-			</View>
 		</RkCard>
 	)
+	renderSeparator = (highlighted) => (
+		<View
+			style={[styles.rowSeparator, { opacity: highlighted ? 0.0 : 1.0 }]}
+		/>
+	);
 
 	render() {
 		return (
@@ -125,6 +131,9 @@ class Posts extends Component {
 						offset: tableCellHeight * index,
 						index,
 					})}
+					ItemSeparatorComponent={this.renderSeparator}
+					onRefresh={() => this.onRefresh()}
+					refreshing={this.props.loading}
 				/>
 			</View>
 		);
@@ -132,6 +141,7 @@ class Posts extends Component {
 }
 const mapStateToProps = (state) => ({
 	posts: state.posts.posts,
+	loading: state.posts.loading,
 });
 const mapActionsToProps = (dispatch) => ({
 	getPosts() {

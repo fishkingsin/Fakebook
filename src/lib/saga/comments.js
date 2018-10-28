@@ -6,7 +6,9 @@ export function* getComments(action) {
 	const { postId } = action.payload;
 	try {
 		const comments = yield call(SDK.comments.getComments, postId);
-		yield put({ type: types.GET_POST_COMMENTS_SUCCESS, payload: { comments, postId } });
+		const payload = { comments, postId };
+		console.log(`getComments , ${JSON.stringify(payload, null, 2)}`);
+		yield put({ type: types.GET_POST_COMMENTS_SUCCESS, payload });
 	} catch (error) {
 		yield put({ type: types.GET_POST_COMMENTS_FAILED, payload: { error } });
 	}
