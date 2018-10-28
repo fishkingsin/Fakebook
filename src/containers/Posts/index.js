@@ -5,7 +5,7 @@ import {
 	View,
 	Button,
 	FlatList,
-	TouchableOpacity,
+	TouchableWithoutFeedback,
 } from 'react-native';
 import {
 	RkButton,
@@ -18,8 +18,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
-import { GET_POSTS, GET_POST_COMMENTS } from '../../store/actionTypes';
-import Comments from '../../components/Comments';
+import { GET_POSTS } from '../../store/actionTypes';
 
 const tableCellHeight = 72;
 
@@ -82,9 +81,8 @@ class Posts extends Component {
 		this.props.getPosts();
 	}
 
-	onPress = () => {
-		console.log('this.props.navigation', this.props.navigation);
-		this.props.navigation.navigate('Detail');
+	onPress = (post) => {
+		this.props.navigation.navigate('Post', { post });
 	}
 
 	onRefresh = () => {
@@ -96,19 +94,21 @@ class Posts extends Component {
 	}
 
 	renderComponent = (post, index) => (
-		<RkCard>
-			<View rkCardHeader>
-				<View>
-					<RkText rkType="header">{ post.title }</RkText>
-					{/* <RkText rkType="subtitle">Subtitle</RkText> */}
+		<TouchableWithoutFeedback onPress={() => { this.onPress(post); }}>
+			<RkCard>
+				<View rkCardHeader>
+					<View>
+						<RkText rkType="header">{ post.title }</RkText>
+						{/* <RkText rkType="subtitle">Subtitle</RkText> */}
+					</View>
 				</View>
-			</View>
-			<View rkCardContent>
-				<RkText rkType="cardText">
-					{ post.body }
-				</RkText>
-			</View>
-		</RkCard>
+				<View rkCardContent>
+					<RkText rkType="cardText">
+						{ post.body }
+					</RkText>
+				</View>
+			</RkCard>
+		</TouchableWithoutFeedback>
 	)
 	renderSeparator = (highlighted) => (
 		<View

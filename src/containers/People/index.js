@@ -106,7 +106,8 @@ class People extends Component {
 						flex: 0.1,
 						justifyContent: 'space-around',
 						alignContent: 'center',
-					}}>	
+					}}
+					>
 						<Icon name="caret-right" size={26} />
 					</View>
 				</View>

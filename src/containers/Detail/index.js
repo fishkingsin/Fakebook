@@ -29,9 +29,25 @@ const styles = StyleSheet.create({
 		color: '#333333',
 		marginBottom: 5,
 	},
+	rowSeparator: {
+		backgroundColor: 'rgba(0, 0, 0, 0.1)',
+		height: 1,
+	},
 });
+
+RkTheme.setType('RkButton', 'icon', {
+	fontSize: 24,
+	width: '100%',
+	borderRadius: 25,
+	color: 'white',
+	fontColor: 'white',
+	hitSlop: {
+		top: 5, left: 5, bottom: 5, right: 5,
+	},
+});
+
 class Detail extends Component {
-	static navigationOptions = {
+	static navigationOptions = ({ navigation }) => ({
 		tabBarLabel: 'Detail',
 		tabBarIcon: ({ tintColor }) => (
 			<Icon
@@ -40,35 +56,54 @@ class Detail extends Component {
 				style={{ color: tintColor }}
 			/>
 		),
-		title: 'Detail',
-	};
+		title: navigation.getParam('name'),
+	});
 
 	static propTypes = {
 		navigation: PropTypes.object.isRequired,
 		user: PropTypes.object.isRequired,
 	}
 
+	constructor(props) {
+		super(props);
+		this.props.navigation.setParams({
+			name: props.user.name,
+		});
+	}
+
 	renderCard = (item) => (
 		<RkCard>
-			<View rkCardHeader>
+			{/* <View rkCardHeader>
 				<View>
 					<RkText rkType="header">{ item.name }</RkText>
-					{/* <RkText rkType="subtitle">Subtitle</RkText> */}
+					<RkText rkType="subtitle">Subtitle</RkText>
 				</View>
-			</View>
+			</View> */}
 			<View rkCardContent>
-
+				<RkText rkType="header">User Name</RkText>
 				<RkText rkType="cardText">
 					{ `username: ${item.username}` }
 				</RkText>
+				<View
+					style={[styles.rowSeparator]}
+				/>
 				<RkText rkType="header">Email</RkText>
 				<RkText rkType="cardText">{ `${item.email}` }</RkText>
+				<View
+					style={[styles.rowSeparator]}
+				/>
 				<RkText rkType="header">Phone</RkText>
 				<RkText rkType="cardText">{ `${item.phone}` }</RkText>
+				<View
+					style={[styles.rowSeparator]}
+				/>
 				<RkText rkType="header">Website</RkText>
 				<RkText rkType="cardText">{ `${item.website}` }</RkText>
-
-				<RkButton rkType="clear link" onPress={() => { this.navigation.navigate('Address', { user: item }); }}>
+				<View
+					style={[styles.rowSeparator]}
+				/>
+				<RkButton style={{ backgroundColor: 'gray' }} rkType="icon" onPress={() => { this.props.navigation.push('Address', { user: item }); }}>
+					<Icon name="address-card" size={26} />
 					<RkText rkType="accent">Address</RkText>
 				</RkButton>
 				{/* "phone": "1-770-736-8031 x56442",

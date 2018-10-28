@@ -31,10 +31,10 @@ export const callApi = (method, url, callCfg = {}) => {
 		reqCfg.body = handleRequestData(reqCfg.headers['content-type'], data);
 	}
 	const query = (params !== null) ? `?${jsonToURLEncoded(params)}` : '';
-	// console.log('here callApi config', `${baseUrl}${url}${query}`, reqCfg);
+	console.log('here callApi config', `${baseUrl}${url}${query}`, reqCfg);
 	return fetch(`${baseUrl}${url}${query}`, reqCfg)
 		.then(async (res) => {
-			// console.log('here callApi', url, ' result', res);
+			console.log('here callApi', url, ' result', res);
 			const responseText = await res.text();
 			// console.log('here callApi', url, ' responseText', responseText);
 			const responseJson = responseText ? JSON.parse(responseText) : '';

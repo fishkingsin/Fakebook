@@ -5,6 +5,7 @@ import { SDK } from '~/lib/sdk';
 export function* getComments(action) {
 	const { postId } = action.payload;
 	try {
+		console.log('getComments postId', postId);
 		const comments = yield call(SDK.comments.getComments, postId);
 		const payload = { comments, postId };
 		console.log(`getComments , ${JSON.stringify(payload, null, 2)}`);

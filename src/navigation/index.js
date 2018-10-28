@@ -14,8 +14,10 @@ export const RootStack = createSwitchNavigator(
 			{
 				Tabs: containers.Tabs,
 				Detail: containers.Detail,
+				Address: containers.Address,
 				Photos: containers.Photos,
 				Preview: containers.Preview,
+				Post: containers.Post,
 			},
 			{
 				initialRouteName: 'Tabs',

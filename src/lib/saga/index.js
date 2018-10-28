@@ -22,7 +22,7 @@ export function* watchGetAlbums() {
 	yield takeLatest(types.GET_ALBUMS, albums.getAlbums);
 }
 
-export function* watchGetComment() {
+export function* watchGetComments() {
 	yield takeLatest(types.GET_POST_COMMENTS, comments.getComments);
 }
 
@@ -33,6 +33,6 @@ export default function* rootSaga() {
 		watchGetUsers(),
 		watchGetPhotos(),
 		watchGetAlbums(),
-		watchGetComment(),
+		watchGetComments(),
 	]);
 }

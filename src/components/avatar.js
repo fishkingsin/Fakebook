@@ -43,8 +43,8 @@ export class Avatar extends RkComponent {
 					/>
 				</View>
 				<View style={{
-					justifyContent: 'center',
-        			alignItems: 'center',
+					flexDirection: 'column',
+        			justifyContent: 'center',
 				}}
 				>
 					<RkText style={username}>{this.props.name}</RkText>
