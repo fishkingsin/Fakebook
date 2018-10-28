@@ -9,6 +9,7 @@ import users from './users';
 import photos from './photos';
 import albums from './albums';
 import comments from './comments';
+import todos from './todos';
 
 export const callApi = (method, url, callCfg = {}) => {
 	const {
@@ -51,4 +52,5 @@ export const SDK = {
 	albums: albums(callApi),
 	photos: photos(callApi),
 	comments: comments(callApi),
+	todos: todos(callApi),
 };

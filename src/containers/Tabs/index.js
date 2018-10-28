@@ -10,9 +10,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SimpleTabs = createBottomTabNavigator(
 	{
-		Posts: {
-			screen: containers.Posts,
-			path: 'posts',
+		ToDos: {
+			screen: containers.Todos,
+			path: 'todos',
 		},
 		People: {
 			screen: containers.People,
@@ -22,9 +22,9 @@ const SimpleTabs = createBottomTabNavigator(
 			screen: containers.Albums,
 			path: 'albums',
 		},
-		ToDos: {
-			screen: containers.Todos,
-			path: 'todos',
+		Posts: {
+			screen: containers.Posts,
+			path: 'posts',
 		},
 	},
 	{

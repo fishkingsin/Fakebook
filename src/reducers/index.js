@@ -6,6 +6,7 @@ import { posts } from '~/reducers/posts';
 import { users } from '~/reducers/users';
 import { photos } from '~/reducers/photos';
 import { albums } from '~/reducers/albums';
+import { todos } from '~/reducers/todos';
 
 
 export const reducer = persistCombineReducers({ key: 'root', storage }, {
@@ -14,4 +15,5 @@ export const reducer = persistCombineReducers({ key: 'root', storage }, {
 	users,
 	photos,
 	albums,
+	todos,
 });

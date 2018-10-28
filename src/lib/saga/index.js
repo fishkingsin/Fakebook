@@ -5,6 +5,7 @@ import * as users from './users';
 import * as photos from './photos';
 import * as albums from './albums';
 import * as comments from './comments';
+import * as todos from './todos';
 
 export function* watchGetPosts() {
 	yield takeLatest(types.GET_POSTS, posts.getPosts);
@@ -26,6 +27,10 @@ export function* watchGetComments() {
 	yield takeLatest(types.GET_POST_COMMENTS, comments.getComments);
 }
 
+export function* watchGetTodos() {
+	yield takeLatest(types.GET_TODOS, todos.getTodos);
+}
+
 
 export default function* rootSaga() {
 	yield all([
@@ -34,5 +39,6 @@ export default function* rootSaga() {
 		watchGetPhotos(),
 		watchGetAlbums(),
 		watchGetComments(),
+		watchGetTodos(),
 	]);
 }
