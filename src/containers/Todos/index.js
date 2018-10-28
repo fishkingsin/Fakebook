@@ -47,92 +47,54 @@ class Todos extends Component {
 	};
 
 	static propTypes = {
-		navigation: PropTypes.object.isRequired,
-		todos: PropTypes.array,
-		users: PropTypes.array,
+		// navigation: PropTypes.object.isRequired,
+		getTodos: PropTypes.func.isRequired,
+		getUsers: PropTypes.func.isRequired,
+		todos: PropTypes.array.isRequired,
+		users: PropTypes.array.isRequired,
 		loading: PropTypes.bool.isRequired,
-	}
-
-	static defaultProps = {
-		todos: [
-			{
-				userId: 1,
-				id: 1,
-				title: 'delectus aut autem',
-				completed: false,
-			},
-			{
-				userId: 1,
-				id: 2,
-				title: 'quis ut nam facilis et officia qui',
-				completed: false,
-			},
-			{
-				userId: 1,
-				id: 3,
-				title: 'fugiat veniam minus',
-				completed: false,
-			},
-			{
-				userId: 1,
-				id: 4,
-				title: 'et porro tempora',
-				completed: true,
-			},
-			{
-				userId: 1,
-				id: 5,
-				title: 'laboriosam mollitia et enim quasi adipisci quia provident illum',
-				completed: false,
-			},
-			{
-				userId: 1,
-				id: 6,
-				title: 'qui ullam ratione quibusdam voluptatem quia omnis',
-				completed: false,
-			},
-			{
-				userId: 1,
-				id: 7,
-				title: 'illo expedita consequatur quia in',
-				completed: false,
-			},
-			{
-				userId: 1,
-				id: 8,
-				title: 'quo adipisci enim quam ut ab',
-				completed: true,
-			},
-			{
-				userId: 1,
-				id: 9,
-				title: 'molestiae perspiciatis ipsa',
-				completed: false,
-			},
-		],
 	}
 
 	constructor(props) {
 		super(props);
-		const checked = new Map(this.props.todos);
+		const checked = new Map();
 		this.props.todos.forEach((d) => {
-			checked.set(d.id, false);
+			checked.set(d.id, d.completed);
 		});
 		this.state = {
 			checked,
 		};
+		this.onRefresh = this.onRefresh.bind(this);
+	}
+
+	componentWillMount() {
+		this.getTodos();
+		this.getUsers();
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (_.isEqual(nextProps.todos, this.props.todos)) {
 			const checked = new Map();
 			this.props.todos.forEach((d) => {
-				checked.set(d.id, false);
+				checked.set(d.id, d.completed);
 			});
 			this.setState({
 				checked,
 			});
 		}
+	}
+
+	onRefresh = () => {
+		this.getUsers();
+		this.getTodos();
+	}
+
+	getTodos = () => {
+		this.props.getTodos();
+	}
+
+	getUsers = () => {
+		this.props.getUsers();
 	}
 
 	renderComponent = (item, index) => (
@@ -189,7 +151,7 @@ class Todos extends Component {
 
 const mapStateToProps = (state) => ({
 	users: state.users.users,
-	todos: state.posts.posts,
+	todos: state.todos.todos,
 	loading: state.posts.loading,
 });
 const mapActionsToProps = (dispatch) => ({

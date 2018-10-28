@@ -1,19 +1,10 @@
-import {
-	NavigationScreenProp,
-	NavigationEventSubscription,
-} from 'react-navigation';
 import React from 'react';
-import { Platform, ScrollView, StatusBar, View } from 'react-native';
-import { SafeAreaView, createBottomTabNavigator } from 'react-navigation';
+import PropTypes from 'prop-types';
+import { createBottomTabNavigator } from 'react-navigation';
 import * as containers from '~cont/*/index.js';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SimpleTabs = createBottomTabNavigator(
 	{
-		ToDos: {
-			screen: containers.Todos,
-			path: 'todos',
-		},
 		People: {
 			screen: containers.People,
 			path: 'cart',
@@ -26,6 +17,10 @@ const SimpleTabs = createBottomTabNavigator(
 			screen: containers.Posts,
 			path: 'posts',
 		},
+		ToDos: {
+			screen: containers.Todos,
+			path: 'todos',
+		},
 	},
 	{
 		tabBarOptions: {
@@ -36,20 +31,23 @@ const SimpleTabs = createBottomTabNavigator(
 );
 class SimpleTabsContainer extends React.Component {
 	static router = SimpleTabs.router;
+	static propTypes = {
+		navigation: PropTypes.object.isRequired,
+	}
 
 	componentDidMount() {
-		this._s0 = this.props.navigation.addListener('willFocus', this._onAction);
-		this._s1 = this.props.navigation.addListener('didFocus', this._onAction);
-		this._s2 = this.props.navigation.addListener('willBlur', this._onAction);
-		this._s3 = this.props.navigation.addListener('didBlur', this._onAction);
+		this.s0 = this.props.navigation.addListener('willFocus', this.onAction);
+		this.s1 = this.props.navigation.addListener('didFocus', this.onAction);
+		this.s2 = this.props.navigation.addListener('willBlur', this.onAction);
+		this.s3 = this.props.navigation.addListener('didBlur', this.onAction);
 	}
 	componentWillUnmount() {
-		this._s0.remove();
-		this._s1.remove();
-		this._s2.remove();
-		this._s3.remove();
+		this.s0.remove();
+		this.s1.remove();
+		this.s2.remove();
+		this.s3.remove();
 	}
-	_onAction = a => {
+	onAction = a => {
 		console.log('TABS EVENT', a.type, a);
 	};
 	render() {

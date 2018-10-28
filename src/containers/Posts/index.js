@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import {
 	StyleSheet,
-	Text,
 	View,
-	Button,
 	FlatList,
 	TouchableWithoutFeedback,
 } from 'react-native';
 import {
-	RkButton,
 	RkText,
 	RkCard,
 	RkTheme,
