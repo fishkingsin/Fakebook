@@ -96,9 +96,6 @@ class Post extends Component {
 	componentWillReceiveProps(nextProps) {
 		if (_.isEqual(nextProps.post, this.props.post)) {
 			this.getComments(nextProps.post.id);
-			// this.props.navigation.setParams({
-			// 	title: nextProps.post.title,
-			// });
 		}
 	}
 

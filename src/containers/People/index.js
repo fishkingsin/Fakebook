@@ -97,9 +97,6 @@ class People extends Component {
 							name={item.name}
 							description={item.email}
 						/>
-						{/* <Text style={{ fontSize: 26 }}>
-							{ item.name }
-						</Text> */}
 					</View>
 					<View style={{
 						marginRight: 10,

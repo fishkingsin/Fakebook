@@ -103,7 +103,6 @@ class Photos extends Component {
 					source={{ uri: item.thumbnailUrl }}
 					resizeMode={FastImage.resizeMode.cover}
 				/>
-				{/* <Text numberOfLines={1} >{ item.title}</Text> */}
 			</View>
 		</TouchableOpacity>
 	)

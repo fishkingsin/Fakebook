@@ -136,13 +136,6 @@ class Detail extends Component {
 					<Icon name="address-card" size={26} color="white" />
 					<RkText rkType="accent" style={{ marginLeft: 10, color: 'white' }} >Address</RkText>
 				</RkButton>
-				{/* "phone": "1-770-736-8031 x56442",
-				"website": "hildegard.org",
-				"company": {
-					"name": "Romaguera-Crona",
-					"catchPhrase": "Multi-layered client-server neural-net",
-					"bs": "harness real-time e-markets"
-				} */}
 			</View>
 		</RkCard>
 	)

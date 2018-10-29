@@ -120,32 +120,6 @@ class Address extends Component {
 			},
 		};
 	}
-	/*
-	"address": {
-		"street": "Kulas Light",
-		"suite": "Apt. 556",
-		"city": "Gwenborough",
-		"zipcode": "92998-3874",
-		"geo": {
-		"lat": "-37.3159",
-		"lng": "81.1496"
-		}
-	},
-	*/
-	// renderMakers = () => (
-	// 	markers.map((marker) => (
-	// 		<Marker
-	// 			title={`${marker.lat} ${marker.lng}`}
-	// 			key={marker.lat}
-	// 			coordinate={{
-	// 				latitude: marker.lat,
-	// 				longitude: marker.lng,
-	// 				latitudeDelta: LATITUDE_DELTA,
-	// 				longitudeDelta: LONGITUDE_DELTA,
-	// 			}}
-	// 		/>
-	// 	))
-	// )
 
 	render() {
 		return (
