@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import {
 	RkButton,
 	RkText,
@@ -15,7 +15,7 @@ import { GET_USERS } from '../../store/actionTypes';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
+		justifyContent: 'flex-start',
 		alignItems: 'stretch',
 		backgroundColor: '#F5FCFF',
 	},
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 	},
 	rowSeparator: {
+		marginVertical: 5,
 		backgroundColor: 'rgba(0, 0, 0, 0.1)',
 		height: 1,
 	},
@@ -73,12 +74,41 @@ class Detail extends Component {
 
 	renderCard = (item) => (
 		<RkCard>
-			{/* <View rkCardHeader>
-				<View>
-					<RkText rkType="header">{ item.name }</RkText>
-					<RkText rkType="subtitle">Subtitle</RkText>
+			<View
+				rkCardHeader
+				style={{
+					justifyContent: 'center',
+					alignItems: 'center',
+					flexDirection: 'row',
+				}}
+			>
+				<View style={{
+					justifyContent: 'center',
+					alignItems: 'center',
+					margin: 5,
+					width: 100,
+					height: 100,
+					borderRadius: 50,
+					backgroundColor: 'rgba(0, 0, 0, 0.1)',
+				}}
+				>
+					<Icon
+						style={{ color: 'white' }}
+						name="user"
+						size={32}
+					/>
 				</View>
-			</View> */}
+			</View>
+			<View
+				rkCardHeader
+				style={{
+					justifyContent: 'center',
+					alignItems: 'center',
+					flexDirection: 'row',
+				}}
+			>
+				<Text>{this.props.user.name}</Text>
+			</View>
 			<View rkCardContent>
 				<RkText rkType="header">User Name</RkText>
 				<RkText rkType="cardText">
@@ -103,8 +133,8 @@ class Detail extends Component {
 					style={[styles.rowSeparator]}
 				/>
 				<RkButton style={{ backgroundColor: 'gray' }} rkType="icon" onPress={() => { this.props.navigation.push('Address', { user: item }); }}>
-					<Icon name="address-card" size={26} />
-					<RkText rkType="accent">Address</RkText>
+					<Icon name="address-card" size={26} color="white" />
+					<RkText rkType="accent" style={{ marginLeft: 10, color: 'white' }} >Address</RkText>
 				</RkButton>
 				{/* "phone": "1-770-736-8031 x56442",
 				"website": "hildegard.org",
@@ -120,9 +150,11 @@ class Detail extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				{
-					this.renderCard(this.props.user)
-				}
+				<ScrollView>
+					{	
+						this.renderCard(this.props.user)
+					}
+				</ScrollView>
 			</View>
 		);
 	}

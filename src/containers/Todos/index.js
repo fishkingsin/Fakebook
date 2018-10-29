@@ -99,6 +99,7 @@ class Todos extends Component {
 
 	renderComponent = (item, index) => (
 		<CheckBox
+			style={{ paddingHorizontal: 10 }}
 			onPress={() => {
 				this.setState((state) => {
 					const checked = new Map(state.checked);

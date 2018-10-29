@@ -15,7 +15,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
-import { GET_POSTS } from '../../store/actionTypes';
+import { GET_POSTS, GET_USERS } from '../../store/actionTypes';
+import { Avatar } from '../../components/avatar';
 
 const tableCellHeight = 72;
 
@@ -65,17 +66,20 @@ class Posts extends Component {
 		navigation: PropTypes.object.isRequired,
 		posts: PropTypes.array.isRequired,
 		getPosts: PropTypes.func.isRequired,
+		getUsers: PropTypes.func.isRequired,
 		loading: PropTypes.bool.isRequired,
 	}
 
 	constructor(props) {
 		super(props);
 		this.getPosts = this.getPosts.bind(this);
+		this.getUsers = this.getUsers.bind(this);
 		this.onRefresh = this.onRefresh.bind(this);
 	}
 
 	componentWillMount() {
 		this.props.getPosts();
+		this.props.getUsers();
 	}
 
 	onPress = (post) => {
@@ -89,14 +93,30 @@ class Posts extends Component {
 	getPosts = () => {
 		this.props.getPosts();
 	}
+	getUsers = () => {
+		this.props.getUsers();
+	}
 
 	renderComponent = (post, index) => (
 		<TouchableWithoutFeedback onPress={() => { this.onPress(post); }}>
 			<RkCard>
 				<View rkCardHeader>
+					<View style={{
+						flex: 1,
+						justifyContent: 'space-around',
+						alignContent: 'center',
+					}}
+					>
+						{
+							(post.user !== undefined) && <Avatar
+								name={post.user.name}
+							/>
+						}
+					</View>
+				</View>
+				<View rkCardHeader>
 					<View>
 						<RkText rkType="header">{ post.title }</RkText>
-						{/* <RkText rkType="subtitle">Subtitle</RkText> */}
 					</View>
 				</View>
 				<View rkCardContent>
@@ -107,6 +127,7 @@ class Posts extends Component {
 			</RkCard>
 		</TouchableWithoutFeedback>
 	)
+
 	renderSeparator = (highlighted) => (
 		<View
 			style={[styles.rowSeparator, { opacity: highlighted ? 0.0 : 1.0 }]}
@@ -137,12 +158,18 @@ class Posts extends Component {
 	}
 }
 const mapStateToProps = (state) => ({
-	posts: state.posts.posts,
+	posts: _.flatMap(state.posts.posts, (post) => ({
+		...post,
+		user: _.find(state.users.users, { id: post.userId }),
+	})),
 	loading: state.posts.loading,
 });
 const mapActionsToProps = (dispatch) => ({
 	getPosts() {
 		dispatch({ type: GET_POSTS });
+	},
+	getUsers() {
+		dispatch({ type: GET_USERS });
 	},
 });
 
