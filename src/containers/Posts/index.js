@@ -4,11 +4,13 @@ import {
 	View,
 	FlatList,
 	TouchableWithoutFeedback,
+	Text,
 } from 'react-native';
 import {
 	RkText,
 	RkCard,
 	RkTheme,
+	RkButton,
 } from 'react-native-ui-kitten';
 
 import PropTypes from 'prop-types';
@@ -18,7 +20,20 @@ import _ from 'lodash';
 import { GET_POSTS, GET_USERS } from '../../store/actionTypes';
 import { Avatar } from '../../components/avatar';
 
-const tableCellHeight = 72;
+const tableCellHeight = 300;
+
+RkTheme.setType('RkCard', 'post', {
+	img: {
+		height: tableCellHeight,
+		opacity: 0.7,
+	},
+	header: {
+		alignSelf: 'center',
+	},
+	content: {
+		alignSelf: 'center',
+	},
+});
 
 const styles = StyleSheet.create({
 	container: {
@@ -98,34 +113,56 @@ class Posts extends Component {
 	}
 
 	renderComponent = (post, index) => (
-		<TouchableWithoutFeedback onPress={() => { this.onPress(post); }}>
-			<RkCard>
-				<View rkCardHeader>
-					<View style={{
-						flex: 1,
-						justifyContent: 'space-around',
-						alignContent: 'center',
-					}}
-					>
-						{
-							(post.user !== undefined) && <Avatar
-								name={post.user.name}
-							/>
-						}
-					</View>
+		// <View style={styles.cell}>
+		// 	<TouchableWithoutFeedback onPress={() => { this.onPress(post); }}>
+		// 		<View style={{
+		// 			flex: 1,
+		// 			flexDirection: 'column',
+		// 			justifyContent: 'center',
+		// 			alignContent: 'space-around',
+		// 		}}
+		// 		>
+		// 			<View style={{
+		// 				alignContent: 'center',
+		// 			}}
+		// 			>
+		// 				{
+		// 					(post.user !== undefined) && <Avatar
+		// 						name={post.user.name}
+		// 					/>
+		// 				}
+		// 			</View>
+		// 			<Text>{ post.title }</Text>
+		// 			<Text numberOfLines={2}>
+		// 				{ post.body }
+		// 			</Text>
+		// 		</View>
+		// 	</TouchableWithoutFeedback>
+		// </View>
+		<RkCard rkType="story">
+			<View rkCardHeader>
+				<View style={{
+					flexDirection: 'column',
+					alignContent: 'center',
+				}}
+				>
+					{
+						(post.user !== undefined) && <Avatar
+							name={post.user.name}
+						/>
+					}
+					<RkText rkType="header" style={{ textAlign: 'center' }} >{ post.title }</RkText>
 				</View>
-				<View rkCardHeader>
-					<View>
-						<RkText rkType="header">{ post.title }</RkText>
-					</View>
-				</View>
-				<View rkCardContent>
-					<RkText rkType="cardText">
-						{ post.body }
-					</RkText>
-				</View>
-			</RkCard>
-		</TouchableWithoutFeedback>
+
+			</View>
+			<View rkCardContent>
+				<RkText numberOfLines={2} style={{ textAlign: 'left' }}> { post.body } </RkText>
+			</View>
+			<View rkCardFooter>
+				<RkButton rkType="small outline" onPress={() => { this.onPress(post); }}>Read More</RkButton>
+			</View>
+		</RkCard>
+
 	)
 
 	renderSeparator = (highlighted) => (
@@ -140,15 +177,16 @@ class Posts extends Component {
 				<FlatList
 					style={{ flex: 1 }}
 					initialScrollIndex={0}
+					numPerPage={3}
 					data={this.props.posts}
 					keyExtractor={item => `${item.id}`}
 					ref={(ref) => { this.flatListRef = ref; }}
 					renderItem={({ item, index }) => this.renderComponent(item, index)}
-					getItemLayout={(data, index) => ({
-						length: tableCellHeight,
-						offset: tableCellHeight * index,
-						index,
-					})}
+					// getItemLayout={(data, index) => ({
+					// 	length: tableCellHeight,
+					// 	offset: tableCellHeight * index,
+					// 	index,
+					// })}
 					ItemSeparatorComponent={this.renderSeparator}
 					onRefresh={() => this.onRefresh()}
 					refreshing={this.props.loading}
