@@ -85,12 +85,6 @@ class Albums extends Component {
 		this.getPhotos();
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (_.isEqual(nextProps.albums, this.props.albums)) {
-			// console.log('componentWillReceiveProps', nextProps.albums);
-		}
-	}
-
 
 	onPress = (id) => {
 		console.log('this.props.navigation', this.props.navigation);

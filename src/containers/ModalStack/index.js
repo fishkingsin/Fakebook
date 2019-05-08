@@ -75,7 +75,7 @@ const ProfileNavigator = createStackNavigator(
 );
 
 const MyHeaderTestScreen = ({ navigation }) => (
-	<MyNavScreen banner={`Full screen view`} navigation={navigation} />
+	<MyNavScreen banner="Full screen view" navigation={navigation} />
 );
 MyHeaderTestScreen.navigationOptions = ({ navigation }) => {
 	const headerVisible =
@@ -98,7 +98,7 @@ const ModalStack = createStackNavigator(
 			header: null,
 		},
 		mode: 'modal',
-	}
+	},
 );
 
 export default ModalStack;

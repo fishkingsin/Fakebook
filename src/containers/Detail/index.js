@@ -144,7 +144,7 @@ class Detail extends Component {
 		return (
 			<View style={styles.container}>
 				<ScrollView>
-					{	
+					{
 						this.renderCard(this.props.user)
 					}
 				</ScrollView>

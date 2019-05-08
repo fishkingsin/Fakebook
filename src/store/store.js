@@ -11,6 +11,7 @@ sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store, null, () => {
 	const state = store.getState();
+	return state;
 });
 
 export { store, persistor };

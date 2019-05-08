@@ -7,6 +7,10 @@ module.exports = {
 		"__DEV__": true
 	},
 	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"ecmaFeatures": { "legacyDecorators": true }
+	},
 	"rules": {
 		"react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
 		"indent": [2, "tab", { "SwitchCase": 1, "VariableDeclarator": 1 }],
@@ -16,7 +20,8 @@ module.exports = {
 		"react/jsx-indent-props": [2, "tab"],
 		"react/forbid-prop-types": 0,
 		"react/prefer-stateless-function": 0,
-		"import/prefer-default-export": 0
+		"import/prefer-default-export": 0,
+		"quotes": [2, "single", "avoid-escape"],
 	},
 	"settings": {
 		"import/resolver": {

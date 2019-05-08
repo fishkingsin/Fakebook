@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Dimensions, View, ScrollView } from 'react-native';
-import {
-	RkButton,
-	RkText,
-	RkCard,
-	RkTheme,
-} from 'react-native-ui-kitten';
-import MapView, { Marker, ProviderPropType } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,8 +10,6 @@ const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
 
-const LATITUDE = 22.3785184;
-const LONGITUDE = 114.066272;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 

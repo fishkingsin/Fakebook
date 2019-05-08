@@ -115,12 +115,10 @@ class Preview extends Component {
 }
 
 
-const mapStateToProps = (state, ownProps) => {
-	return {
-		data: ownProps.navigation.getParam('photos'),
-		initialRenderIndex: ownProps.navigation.getParam('initialRenderIndex'),
-	};
-};
+const mapStateToProps = (state, ownProps) => ({
+	data: ownProps.navigation.getParam('photos'),
+	initialRenderIndex: ownProps.navigation.getParam('initialRenderIndex'),
+});
 const mapActionsToProps = (dispatch) => ({
 	getPhotos() {
 		dispatch({ type: GET_PHOTOS });

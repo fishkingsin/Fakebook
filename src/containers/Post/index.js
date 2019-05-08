@@ -93,9 +93,9 @@ class Post extends Component {
 		this.getComments(this.props.post.id);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (_.isEqual(nextProps.post, this.props.post)) {
-			this.getComments(nextProps.post.id);
+	componentDidUpdate(prevProps) {
+		if (_.isEqual(prevProps.post, this.props.post)) {
+			this.getComments(this.props.post.id);
 		}
 	}
 

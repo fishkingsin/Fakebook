@@ -71,12 +71,6 @@ class Photos extends Component {
 		this.getPhotos();
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (_.isEqual(nextProps.photos, this.props.photos)) {
-			console.log('componentWillReceiveProps', nextProps.photos);
-		}
-	}
-
 
 	onPress = (index) => {
 		console.log('this.props.navigation', this.props.navigation);

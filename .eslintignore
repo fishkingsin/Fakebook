@@ -1,2 +1,10 @@
+.vscode
+android
 coverage
+docker
 e2e
+fastlane
+ios
+scripts
+node_modules
+babel.config.js

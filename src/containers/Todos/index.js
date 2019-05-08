@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { List, ListItem, CheckBox } from 'react-native-elements';
-import {
-	RkButton,
-	RkText,
-	RkCard,
-	RkTheme,
-} from 'react-native-ui-kitten';
+import { CheckBox } from 'react-native-elements';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -72,16 +66,14 @@ class Todos extends Component {
 		this.getUsers();
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (_.isEqual(nextProps.todos, this.props.todos)) {
-			const checked = new Map();
-			this.props.todos.forEach((d) => {
-				checked.set(d.id, d.completed);
-			});
-			this.setState({
-				checked,
-			});
-		}
+	static getDerivedStateFromProps(props) {
+		const checked = new Map();
+		props.todos.forEach((d) => {
+			checked.set(d.id, d.completed);
+		});
+		return {
+			checked,
+		};
 	}
 
 	onRefresh = () => {

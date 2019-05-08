@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import {
 	StyleSheet,
-	Text,
-	View,
-	Button,
-	FlatList,
-	TouchableOpacity,
 } from 'react-native';
 import {
 	RkButton,
@@ -20,7 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 import { GET_POST_COMMENTS } from '../../store/actionTypes';
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
 	screen: {
 		backgroundColor: '#f0f1f5',
 		padding: 12,

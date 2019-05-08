@@ -58,7 +58,7 @@ class People extends Component {
 		this.getUsers = this.getUsers.bind(this);
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.getUsers();
 	}
 
