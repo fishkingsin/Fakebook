@@ -1,0 +1,154 @@
+PODS:
+  - boost-for-react-native (1.63.0)
+  - DoubleConversion (1.1.6)
+  - FLAnimatedImage (1.0.12)
+  - Folly (2018.10.22.00):
+    - boost-for-react-native
+    - DoubleConversion
+    - glog
+  - glog (0.3.5)
+  - React (0.59.6):
+    - React/Core (= 0.59.6)
+  - react-native-config (0.11.7):
+    - React
+  - react-native-fast-image (5.0.11):
+    - FLAnimatedImage
+    - React
+    - SDWebImage/Core
+    - SDWebImage/GIF
+  - react-native-maps (0.22.0):
+    - React
+  - react-native-safe-area (0.5.0):
+    - React
+  - React/Core (0.59.6):
+    - yoga (= 0.59.6.React)
+  - React/CxxBridge (0.59.6):
+    - Folly (= 2018.10.22.00)
+    - React/Core
+    - React/cxxreact
+    - React/jsiexecutor
+  - React/cxxreact (0.59.6):
+    - boost-for-react-native (= 1.63.0)
+    - DoubleConversion
+    - Folly (= 2018.10.22.00)
+    - glog
+    - React/jsinspector
+  - React/DevSupport (0.59.6):
+    - React/Core
+    - React/RCTWebSocket
+  - React/fishhook (0.59.6)
+  - React/jsi (0.59.6):
+    - DoubleConversion
+    - Folly (= 2018.10.22.00)
+    - glog
+  - React/jsiexecutor (0.59.6):
+    - DoubleConversion
+    - Folly (= 2018.10.22.00)
+    - glog
+    - React/cxxreact
+    - React/jsi
+  - React/jsinspector (0.59.6)
+  - React/RCTActionSheet (0.59.6):
+    - React/Core
+  - React/RCTAnimation (0.59.6):
+    - React/Core
+  - React/RCTBlob (0.59.6):
+    - React/Core
+  - React/RCTGeolocation (0.59.6):
+    - React/Core
+  - React/RCTImage (0.59.6):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTLinkingIOS (0.59.6):
+    - React/Core
+  - React/RCTNetwork (0.59.6):
+    - React/Core
+  - React/RCTSettings (0.59.6):
+    - React/Core
+  - React/RCTText (0.59.6):
+    - React/Core
+  - React/RCTVibration (0.59.6):
+    - React/Core
+  - React/RCTWebSocket (0.59.6):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
+  - RNVectorIcons (6.0.2):
+    - React
+  - SDWebImage/Core (4.4.6)
+  - SDWebImage/GIF (4.4.6):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
+  - yoga (0.59.6.React)
+
+DEPENDENCIES:
+  - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
+  - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-fast-image (from `../node_modules/react-native-fast-image`)
+  - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-safe-area (from `../node_modules/react-native-safe-area`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/CxxBridge (from `../node_modules/react-native`)
+  - React/DevSupport (from `../node_modules/react-native`)
+  - React/RCTActionSheet (from `../node_modules/react-native`)
+  - React/RCTAnimation (from `../node_modules/react-native`)
+  - React/RCTBlob (from `../node_modules/react-native`)
+  - React/RCTGeolocation (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTLinkingIOS (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTSettings (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTVibration (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - boost-for-react-native
+    - FLAnimatedImage
+    - SDWebImage
+
+EXTERNAL SOURCES:
+  DoubleConversion:
+    :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+  Folly:
+    :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
+  glog:
+    :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  React:
+    :path: "../node_modules/react-native"
+  react-native-config:
+    :path: "../node_modules/react-native-config"
+  react-native-fast-image:
+    :path: "../node_modules/react-native-fast-image"
+  react-native-maps:
+    :path: "../node_modules/react-native-maps"
+  react-native-safe-area:
+    :path: "../node_modules/react-native-safe-area"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
+
+SPEC CHECKSUMS:
+  boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  Folly: de497beb10f102453a1afa9edbf8cf8a251890de
+  glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
+  React: 0bb58efca577aa4b3c8f03a9fbf0d9a8ebdb5ac4
+  react-native-config: 55548054279d92e0e4566ea15a8b9b81028ec342
+  react-native-fast-image: c180ad22c7e76e08cbd0d37ebc04dea62bfa777b
+  react-native-maps: afb9602cb6e59929716361b7bd9003dd18cd928e
+  react-native-safe-area: 7dc92953fce43bf36ab5ecae2fb4ffa2bda9a203
+  RNVectorIcons: d819334932bcda3332deb3d2c8ea4d069e0b98f9
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  yoga: 8dacc3c5977cb8e07c346e203bb5f4ffe01296df
+
+PODFILE CHECKSUM: f8ea4341eb4aafb31ee1bcaeb3d119c3b7b69a98
+
+COCOAPODS: 1.6.1
