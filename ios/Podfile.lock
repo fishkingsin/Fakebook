@@ -73,6 +73,8 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNGestureHandler (1.2.1):
+    - React
   - RNVectorIcons (6.0.2):
     - React
   - SDWebImage/Core (4.4.6)
@@ -103,6 +105,7 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -129,6 +132,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-safe-area:
     :path: "../node_modules/react-native-safe-area"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   yoga:
@@ -145,10 +150,11 @@ SPEC CHECKSUMS:
   react-native-fast-image: c180ad22c7e76e08cbd0d37ebc04dea62bfa777b
   react-native-maps: afb9602cb6e59929716361b7bd9003dd18cd928e
   react-native-safe-area: 7dc92953fce43bf36ab5ecae2fb4ffa2bda9a203
+  RNGestureHandler: aea90f0ad8e35fec23438db6fc3ad79be58bb734
   RNVectorIcons: d819334932bcda3332deb3d2c8ea4d069e0b98f9
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   yoga: 8dacc3c5977cb8e07c346e203bb5f4ffe01296df
 
-PODFILE CHECKSUM: f8ea4341eb4aafb31ee1bcaeb3d119c3b7b69a98
+PODFILE CHECKSUM: f87f42e943c94ba98f4d95d66ed35e5fa650cdde
 
 COCOAPODS: 1.6.1

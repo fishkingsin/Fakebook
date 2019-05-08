@@ -26,6 +26,7 @@ module.exports = {
 				"loose": true
 			}
 		],
+		"@babel/plugin-proposal-export-namespace-from",
 		"relay",
     	"jest-hoist",
 		"import-glob"
